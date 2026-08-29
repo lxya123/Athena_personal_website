@@ -43,6 +43,7 @@ sooner.
 index.html                    all the page content — this is the file to edit most
 css/styles.css                colors, fonts, layout (numbered sections, top to bottom)
 js/rain.js                    the rainfall
+js/cards.js                   expanding interest cards + their tilt-toward-cursor
 js/petals.js                  peony petals falling and tumbling down the page
 js/sky.js                     stars, twinkle, and the occasional shooting star
 js/scene.js                   connects scroll position to rain / sky / garden
@@ -61,7 +62,11 @@ assets/portrait-placeholder.svg   swap for a real photo
 - **Colors** — change the variables under `:root` in `css/styles.css`. Every
   burgundy in the site comes from those few lines.
 - **Interest cards** — each one is an `<article class="feature-card v-…">` in the
-  Interests section: a number, an inline SVG emblem, a tag, and a line of text.
+  Interests section: a number, an inline SVG emblem, a tag, a line of text, and a
+  **Read more** panel that expands when clicked. The expanded card takes the full
+  width of the row. Each card currently holds an italic placeholder line — replace
+  the `<p class="fc-prompt">…</p>` inside `.fc-detail-panel` with real paragraphs
+  and drop the `fc-prompt` class.
   Copy a card, renumber it, swap the emblem, and pick a color variant:
   `v-wine`, `v-rose`, `v-ash`, or `v-neon` (all defined at the end of section 7
   in `css/styles.css`). The emblem lifts and the card rises on hover.
@@ -75,6 +80,8 @@ assets/portrait-placeholder.svg   swap for a real photo
 
 ## Accessibility
 
+- Cards expand on click, close on a second click or the **Escape** key, and only
+  one is open at a time.
 - The **Calm mode** button in the top bar stops the rain, the flicker, and the
   swaying, and remembers the choice for next visit.
 - Visitors whose system is set to *reduce motion* get calm mode automatically.
