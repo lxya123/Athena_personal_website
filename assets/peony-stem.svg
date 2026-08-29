@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 460" width="200" height="460" role="img" aria-label="Peony on a stem">
+  <defs>
+    <radialGradient id="sOuter" cx="50%" cy="55%" r="60%">
+      <stop offset="0%" stop-color="#f3d7dd"/>
+      <stop offset="60%" stop-color="#c4788b"/>
+      <stop offset="100%" stop-color="#7d2437"/>
+    </radialGradient>
+    <radialGradient id="sMid" cx="50%" cy="55%" r="60%">
+      <stop offset="0%" stop-color="#fbe9ed"/>
+      <stop offset="65%" stop-color="#d18e9d"/>
+      <stop offset="100%" stop-color="#8c2f39"/>
+    </radialGradient>
+    <radialGradient id="sCore" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="55%" stop-color="#efc3cd"/>
+      <stop offset="100%" stop-color="#a83b4d"/>
+    </radialGradient>
+    <linearGradient id="stem" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5c6b4f"/>
+      <stop offset="100%" stop-color="#2f3a2a"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#67784f"/>
+      <stop offset="100%" stop-color="#2e3a26"/>
+    </linearGradient>
+  </defs>
+
+  <!-- stem -->
+  <path d="M100 130 C 96 240, 106 330, 100 460 L112 460 C 118 330, 108 240, 112 130 Z" fill="url(#stem)"/>
+
+  <!-- leaves -->
+  <path d="M104 250 C 60 236, 30 258, 16 292 C 62 302, 94 288, 104 250 Z" fill="url(#leaf)"/>
+  <path d="M108 320 C 150 302, 182 320, 196 352 C 150 366, 118 356, 108 320 Z" fill="url(#leaf)"/>
+  <path d="M102 196 C 70 190, 46 206, 36 232 C 72 238, 96 226, 102 196 Z" fill="url(#leaf)" opacity=".85"/>
+
+  <!-- blossom -->
+  <g transform="translate(100 108)">
+    <g fill="url(#sOuter)">
+      <g><ellipse cx="0" cy="-58" rx="32" ry="40"/></g>
+      <g transform="rotate(45)"><ellipse cx="0" cy="-58" rx="32" ry="40"/></g>
+      <g transform="rotate(90)"><ellipse cx="0" cy="-58" rx="32" ry="40"/></g>
+      <g transform="rotate(135)"><ellipse cx="0" cy="-58" rx="32" ry="40"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-58" rx="32" ry="40"/></g>
+      <g transform="rotate(225)"><ellipse cx="0" cy="-58" rx="32" ry="40"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-58" rx="32" ry="40"/></g>
+      <g transform="rotate(315)"><ellipse cx="0" cy="-58" rx="32" ry="40"/></g>
+    </g>
+    <g fill="url(#sMid)">
+      <g transform="rotate(22)"><ellipse cx="0" cy="-36" rx="25" ry="30"/></g>
+      <g transform="rotate(82)"><ellipse cx="0" cy="-36" rx="25" ry="30"/></g>
+      <g transform="rotate(142)"><ellipse cx="0" cy="-36" rx="25" ry="30"/></g>
+      <g transform="rotate(202)"><ellipse cx="0" cy="-36" rx="25" ry="30"/></g>
+      <g transform="rotate(262)"><ellipse cx="0" cy="-36" rx="25" ry="30"/></g>
+      <g transform="rotate(322)"><ellipse cx="0" cy="-36" rx="25" ry="30"/></g>
+    </g>
+    <g fill="url(#sCore)">
+      <g transform="rotate(10)"><ellipse cx="0" cy="-17" rx="15" ry="19"/></g>
+      <g transform="rotate(82)"><ellipse cx="0" cy="-17" rx="15" ry="19"/></g>
+      <g transform="rotate(154)"><ellipse cx="0" cy="-17" rx="15" ry="19"/></g>
+      <g transform="rotate(226)"><ellipse cx="0" cy="-17" rx="15" ry="19"/></g>
+      <g transform="rotate(298)"><ellipse cx="0" cy="-17" rx="15" ry="19"/></g>
+      <circle cx="0" cy="0" r="10" fill="#fdf3f5"/>
+      <circle cx="0" cy="0" r="5.5" fill="#e8b7c2"/>
+    </g>
+  </g>
+</svg>

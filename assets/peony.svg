@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Peony blossom">
+  <defs>
+    <radialGradient id="petalOuter" cx="50%" cy="55%" r="60%">
+      <stop offset="0%" stop-color="#f3d7dd"/>
+      <stop offset="60%" stop-color="#c4788b"/>
+      <stop offset="100%" stop-color="#7d2437"/>
+    </radialGradient>
+    <radialGradient id="petalMid" cx="50%" cy="55%" r="60%">
+      <stop offset="0%" stop-color="#fbe9ed"/>
+      <stop offset="65%" stop-color="#d18e9d"/>
+      <stop offset="100%" stop-color="#8c2f39"/>
+    </radialGradient>
+    <radialGradient id="petalCore" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="55%" stop-color="#efc3cd"/>
+      <stop offset="100%" stop-color="#a83b4d"/>
+    </radialGradient>
+  </defs>
+
+  <g transform="translate(100 100)">
+    <!-- outer ring of petals -->
+    <g fill="url(#petalOuter)" opacity="0.95">
+      <g><ellipse cx="0" cy="-62" rx="34" ry="42"/></g>
+      <g transform="rotate(45)"><ellipse cx="0" cy="-62" rx="34" ry="42"/></g>
+      <g transform="rotate(90)"><ellipse cx="0" cy="-62" rx="34" ry="42"/></g>
+      <g transform="rotate(135)"><ellipse cx="0" cy="-62" rx="34" ry="42"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-62" rx="34" ry="42"/></g>
+      <g transform="rotate(225)"><ellipse cx="0" cy="-62" rx="34" ry="42"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-62" rx="34" ry="42"/></g>
+      <g transform="rotate(315)"><ellipse cx="0" cy="-62" rx="34" ry="42"/></g>
+    </g>
+
+    <!-- middle ring -->
+    <g fill="url(#petalMid)" opacity="0.97">
+      <g transform="rotate(22)"><ellipse cx="0" cy="-38" rx="26" ry="32"/></g>
+      <g transform="rotate(82)"><ellipse cx="0" cy="-38" rx="26" ry="32"/></g>
+      <g transform="rotate(142)"><ellipse cx="0" cy="-38" rx="26" ry="32"/></g>
+      <g transform="rotate(202)"><ellipse cx="0" cy="-38" rx="26" ry="32"/></g>
+      <g transform="rotate(262)"><ellipse cx="0" cy="-38" rx="26" ry="32"/></g>
+      <g transform="rotate(322)"><ellipse cx="0" cy="-38" rx="26" ry="32"/></g>
+    </g>
+
+    <!-- ruffled core -->
+    <g fill="url(#petalCore)">
+      <g transform="rotate(10)"><ellipse cx="0" cy="-18" rx="16" ry="20"/></g>
+      <g transform="rotate(82)"><ellipse cx="0" cy="-18" rx="16" ry="20"/></g>
+      <g transform="rotate(154)"><ellipse cx="0" cy="-18" rx="16" ry="20"/></g>
+      <g transform="rotate(226)"><ellipse cx="0" cy="-18" rx="16" ry="20"/></g>
+      <g transform="rotate(298)"><ellipse cx="0" cy="-18" rx="16" ry="20"/></g>
+      <circle cx="0" cy="0" r="11" fill="#fdf3f5"/>
+      <circle cx="0" cy="0" r="6" fill="#e8b7c2"/>
+    </g>
+  </g>
+</svg>

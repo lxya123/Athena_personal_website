@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Athena — Personal Website</title>
+<meta name="description" content="Personal website of Athena — student, writer, maker.">
+
+<!-- ============ FONTS ============ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="assets/peony.svg" type="image/svg+xml">
+</head>
+
+<body>
+
+<!-- ============ BACKGROUND SCENE ==========================================
+     Three layers, driven by scroll position (see js/scene.js):
+       top of page   -> rain and petals falling over a stormy burgundy sky
+       middle        -> rain thins out, stars and the moon come through
+       bottom        -> a peony garden rises under the night sky
+     ====================================================================== -->
+<div class="bg" aria-hidden="true">
+  <div class="sky-tint"></div>
+  <canvas id="sky"></canvas>
+  <div class="moon"></div>
+  <canvas id="rain"></canvas>
+  <canvas id="petals"></canvas>
+
+  <!-- big soft blossoms behind the opening screen -->
+  <div class="hero-peonies">
+    <img class="bloom b1" src="assets/peony.svg" alt="">
+    <img class="bloom b2" src="assets/peony.svg" alt="">
+    <img class="bloom b3" src="assets/peony.svg" alt="">
+    <img class="bloom b4" src="assets/peony.svg" alt="">
+  </div>
+
+  <!-- the garden: each stem grows up out of the bottom edge as you scroll -->
+  <div class="garden">
+    <div class="stem-wrap g1"><img class="stem" src="assets/peony-stem.svg" alt=""></div>
+    <div class="stem-wrap g2"><img class="stem" src="assets/peony-stem.svg" alt=""></div>
+    <div class="stem-wrap g3"><img class="stem" src="assets/peony-stem.svg" alt=""></div>
+    <div class="stem-wrap g4"><img class="stem" src="assets/peony-stem.svg" alt=""></div>
+    <div class="stem-wrap g5"><img class="stem" src="assets/peony-stem.svg" alt=""></div>
+    <div class="stem-wrap g6"><img class="stem" src="assets/peony-stem.svg" alt=""></div>
+    <div class="stem-wrap g7"><img class="stem" src="assets/peony-stem.svg" alt=""></div>
+    <div class="stem-wrap g8"><img class="stem" src="assets/peony-stem.svg" alt=""></div>
+    <div class="stem-wrap g9"><img class="stem" src="assets/peony-stem.svg" alt=""></div>
+    <div class="ground"></div>
+  </div>
+
+  <div class="vignette"></div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="topbar">
+  <a class="brand" href="#top">Athena</a>
+
+  <button class="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav id="nav" class="nav">
+    <a href="#about">About</a>
+    <a href="#interests">Interests</a>
+    <a href="#projects">Projects</a>
+    <a href="#writing">Writing</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <button id="motion-toggle" class="motion-toggle" type="button"
+          aria-pressed="false" title="Pause or resume background animation">
+    <span class="motion-label">Calm mode</span>
+  </button>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <p class="eyebrow">welcome to my corner of the internet</p>
+    <h1 class="neon" data-text="Athena">Athena</h1>
+    <p class="tagline">Deerfield Academy · drawing, writing, animating · peonies &amp; race weekends</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#projects">See my work</a>
+      <a class="btn btn-ghost" href="#contact">Say hello</a>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="section reveal">
+    <div class="petal-divider" aria-hidden="true">
+      <i></i><img src="assets/peony.svg" alt=""><i></i>
+    </div>
+
+    <h2 class="neon neon-sm" data-text="About Me">About Me</h2>
+    <div class="card-row">
+      <div class="card about-card">
+        <img class="portrait" src="assets/portrait-placeholder.svg" alt="Portrait of Athena">
+        <p class="handwritten">“Peonies, pit lanes, and paper.”</p>
+      </div>
+      <div class="card">
+        <p>
+          Hi! I'm Athena, and I go to Deerfield Academy. Most of my free time goes
+          into drawing, writing, and animating — and when I'm not making something,
+          I'm reading, watching a movie, or watching a race.
+        </p>
+        <p>
+          I'm also deep into fashion, JDM builds, and luxury cars. Ask me about
+          brands, cars, F1, or books and I'll talk for hours.
+        </p>
+        <ul class="facts">
+          <li><span class="k">School</span><span class="v">Deerfield Academy</span></li>
+          <li><span class="k">Making</span><span class="v">Drawings, animations, short stories</span></li>
+          <li><span class="k">Watching</span><span class="v">F1 — and whatever's next in my queue</span></li>
+          <li><span class="k">Reading</span><span class="v"><em>Book title goes here</em></span></li>
+          <li><span class="k">Favorite car</span><span class="v">Yours to fill in</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INTERESTS ============ -->
+  <section id="interests" class="section reveal">
+    <div class="petal-divider" aria-hidden="true">
+      <i></i><img src="assets/peony.svg" alt=""><i></i>
+    </div>
+
+    <h2 class="neon neon-sm" data-text="Interests">Interests</h2>
+    <div class="grid grid-features">
+      <article class="feature-card v-wine">
+        <div class="fc-wash" aria-hidden="true"></div>
+        <span class="fc-index">001</span>
+        <div class="fc-art" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 38l1.6-6.6L30 13a3.4 3.4 0 014.8 0l1.4 1.4a3.4 3.4 0 010 4.8L17.6 37.6 10 38z"/><path d="M28.4 15.4l4.8 4.8"/><path d="M11.6 31.4l4.8 4.8"/></svg></div>
+        <div class="fc-body">
+          <span class="fc-tag">DRAWING</span>
+          <p class="fc-title">Sketchbooks, character studies, and the occasional finished piece.</p>
+        </div>
+      </article>
+      <article class="feature-card v-rose">
+        <div class="fc-wash" aria-hidden="true"></div>
+        <span class="fc-index">002</span>
+        <div class="fc-art" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="11" width="34" height="26" rx="3"/><path d="M13 11v26M35 11v26"/><path d="M21 18.5l8 5.5-8 5.5z"/></svg></div>
+        <div class="fc-body">
+          <span class="fc-tag">ANIMATION</span>
+          <p class="fc-title">Bringing the drawings to life, a few frames at a time.</p>
+        </div>
+      </article>
+      <article class="feature-card v-ash">
+        <div class="fc-wash" aria-hidden="true"></div>
+        <span class="fc-index">003</span>
+        <div class="fc-art" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 7l7 17-7 15-7-15z"/><path d="M24 13v11"/><circle cx="24" cy="27" r="1.8"/></svg></div>
+        <div class="fc-body">
+          <span class="fc-tag">WRITING</span>
+          <p class="fc-title">Stories and essays — and a lot of half-finished openings.</p>
+        </div>
+      </article>
+      <article class="feature-card v-neon">
+        <div class="fc-wash" aria-hidden="true"></div>
+        <span class="fc-index">004</span>
+        <div class="fc-art" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 20v-3a3 3 0 113 -3"/><path d="M24 20L9.4 31.2c-1.3 1-.6 3 1 3h27.2c1.6 0 2.3-2 1-3L24 20z"/></svg></div>
+        <div class="fc-body">
+          <span class="fc-tag">FASHION</span>
+          <p class="fc-title">Brands, silhouettes, archives. I have opinions about all three.</p>
+        </div>
+      </article>
+      <article class="feature-card v-wine">
+        <div class="fc-wash" aria-hidden="true"></div>
+        <span class="fc-index">005</span>
+        <div class="fc-art" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 31v-5.4l4.6-8A3 3 0 0116.2 16h15.6a3 3 0 012.6 1.6l4.6 8V31"/><path d="M9 25.6h30"/><circle cx="16" cy="31" r="3"/><circle cx="32" cy="31" r="3"/><path d="M9 31h4M19 31h10M35 31h4"/></svg></div>
+        <div class="fc-body">
+          <span class="fc-tag">CARS</span>
+          <p class="fc-title">JDM builds and luxury classics. Ask me for the whole spec sheet.</p>
+        </div>
+      </article>
+      <article class="feature-card v-ash">
+        <div class="fc-wash" aria-hidden="true"></div>
+        <span class="fc-index">006</span>
+        <div class="fc-art" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8v34"/><path d="M13 11h24v16H13z"/><path d="M13 11h6v4h-6zM25 11h6v4h-6zM19 15h6v4h-6zM31 15h6v4h-6zM13 19h6v4h-6zM25 19h6v4h-6zM19 23h6v4h-6zM31 23h6v4h-6z" fill="currentColor" stroke="none"/></svg></div>
+        <div class="fc-body">
+          <span class="fc-tag">MOTORSPORT</span>
+          <p class="fc-title">F1 every race weekend, plus endurance racing when I can catch it.</p>
+        </div>
+      </article>
+      <article class="feature-card v-rose">
+        <div class="fc-wash" aria-hidden="true"></div>
+        <span class="fc-index">007</span>
+        <div class="fc-art" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 15v22"/><path d="M24 15c-3.5-2.5-8-3.6-13-3.6v22c5 0 9.5 1.1 13 3.6"/><path d="M24 15c3.5-2.5 8-3.6 13-3.6v22c-5 0-9.5 1.1-13 3.6"/></svg></div>
+        <div class="fc-body">
+          <span class="fc-tag">BOOKS &AMP; SCREENS</span>
+          <p class="fc-title">Reading constantly, and always three episodes into something new.</p>
+        </div>
+      </article>
+      <article class="feature-card v-neon">
+        <div class="fc-wash" aria-hidden="true"></div>
+        <span class="fc-index">008</span>
+        <div class="fc-art" aria-hidden="true"><img class="fc-peony" src="assets/peony.svg" alt=""></div>
+        <div class="fc-body">
+          <span class="fc-tag">PEONIES</span>
+          <p class="fc-title">They bloom for about a week a year. It is worth the wait.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects" class="section reveal">
+    <div class="petal-divider" aria-hidden="true">
+      <i></i><img src="assets/peony.svg" alt=""><i></i>
+    </div>
+
+    <h2 class="neon neon-sm" data-text="Projects">Projects</h2>
+    <p class="section-note handwritten">things I made, in progress and finished</p>
+
+    <div class="grid grid-3">
+      <article class="card project">
+        <div class="thumb thumb-1" aria-hidden="true"></div>
+        <h3>Project One</h3>
+        <p>One or two sentences: what it is, why you made it, what you learned.</p>
+        <p class="tags"><span>HTML</span><span>CSS</span><span>2026</span></p>
+        <a class="link" href="#">View project →</a>
+      </article>
+
+      <article class="card project">
+        <div class="thumb thumb-2" aria-hidden="true"></div>
+        <h3>Project Two</h3>
+        <p>A science fair experiment, an art series, a club you started — anything counts.</p>
+        <p class="tags"><span>Research</span><span>2025</span></p>
+        <a class="link" href="#">Read more →</a>
+      </article>
+
+      <article class="card project">
+        <div class="thumb thumb-3" aria-hidden="true"></div>
+        <h3>Project Three</h3>
+        <p>Duplicate this card for each new project. Delete the ones you don't need.</p>
+        <p class="tags"><span>Writing</span><span>2025</span></p>
+        <a class="link" href="#">See it →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ WRITING / TIMELINE ============ -->
+  <section id="writing" class="section reveal">
+    <div class="petal-divider" aria-hidden="true">
+      <i></i><img src="assets/peony.svg" alt=""><i></i>
+    </div>
+
+    <h2 class="neon neon-sm" data-text="Writing">Writing</h2>
+
+    <ol class="timeline">
+      <li>
+        <span class="when">Aug 2026</span>
+        <h3>A post title goes here</h3>
+        <p>A short summary of the piece — one or two lines is plenty.</p>
+        <a class="link" href="#">Read →</a>
+      </li>
+      <li>
+        <span class="when">Jun 2026</span>
+        <h3>Another thing I wrote</h3>
+        <p>You can use this section as a blog index, a reading log, or a list of awards.</p>
+        <a class="link" href="#">Read →</a>
+      </li>
+      <li>
+        <span class="when">Mar 2026</span>
+        <h3>The first one</h3>
+        <p>Newest entries go on top.</p>
+        <a class="link" href="#">Read →</a>
+      </li>
+    </ol>
+
+    <blockquote class="quote handwritten">
+      “A quote you like, or a line from your own writing.”
+      <cite>— you</cite>
+    </blockquote>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="section reveal">
+    <div class="petal-divider" aria-hidden="true">
+      <i></i><img src="assets/peony.svg" alt=""><i></i>
+    </div>
+
+    <h2 class="neon neon-sm" data-text="Say Hello">Say Hello</h2>
+    <div class="card contact-card">
+      <p>The best way to reach me is email. I answer everything eventually.</p>
+      <p class="contact-links">
+        <a class="btn btn-solid" href="mailto:athenaluo10@gmail.com">athenaluo10@gmail.com</a>
+        <a class="btn btn-ghost" href="https://github.com/lxya123" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost" href="#">Instagram</a>
+      </p>
+      <p class="fineprint">Replace these links, or delete the ones you don't use.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p class="handwritten">made with rain and peonies</p>
+  <p class="fineprint">© <span id="year">2026</span> Athena. All rights reserved.</p>
+</footer>
+
+<script src="js/rain.js"></script>
+<script src="js/petals.js"></script>
+<script src="js/sky.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
