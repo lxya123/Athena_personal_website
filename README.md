@@ -66,10 +66,13 @@ The date orders the list and shows on the site; the rest becomes the title.
 Plain paragraphs are enough, and `**bold**`, `*italic*`, `# headings`, lists,
 quotes, links and images all work. Details in `writing/README.md`.
 
-**A new drawing** — drop an image into `gallery/`. The filename becomes the
-caption (`peony-study.jpg` shows as "Peony study"), and a `2026-05-` style
-prefix is stripped from it. Clicking any drawing opens it full size. Details in
-`gallery/README.md`.
+**A new drawing or animation** — drop an image or a video into `gallery/`. The
+filename becomes the caption (`peony-study.jpg` shows as "Peony study"), and a
+`2026-05-` style prefix is stripped from it. Images and `.mp4` / `.webm` /
+`.mov` animations both work; animations preview quietly on hover and play with
+controls when opened. `gallery/README.md` covers naming and, importantly, how
+to keep video files small enough — export MP4 rather than GIF, and stay under
+about 10 MB per animation.
 
 Both folders are read live from GitHub when the site is published, so a commit
 is all it takes — there is nothing to rebuild. While you are working locally the
@@ -114,7 +117,7 @@ to it in the nav.
 
 ## Accessibility
 
-- Gallery images open in a lightbox with arrow-key navigation and Escape to close.
+- Gallery images and animations open in a lightbox with arrow-key navigation and Escape to close.
 - Cards expand on click, close on a second click or the **Escape** key, and only
   one is open at a time.
 - The **Calm mode** button in the top bar stops the rain, the flicker, and the

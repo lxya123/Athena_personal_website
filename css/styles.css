@@ -813,12 +813,34 @@ main { position: relative; z-index: 10; }
   box-shadow: 0 18px 30px -16px rgba(0, 0, 0, .7), 0 0 26px -14px var(--glow);
 }
 
-.shot img {
+.shot img,
+.shot video {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   display: block;
+  background: rgba(0, 0, 0, .35);
 }
+
+/* the little play marker on an animation tile */
+.shot-badge {
+  position: absolute;
+  top: .6rem;
+  right: .6rem;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding-left: 2px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .35);
+  background: rgba(20, 12, 15, .7);
+  color: var(--burgundy-200);
+  font-size: .7rem;
+  backdrop-filter: blur(4px);
+  transition: opacity .25s ease;
+}
+.shot.is-video:hover .shot-badge { opacity: 0; }
 
 .shot-caption {
   position: absolute;
@@ -856,6 +878,7 @@ main { position: relative; z-index: 10; }
 .lightbox[hidden] { display: none; }
 body.lb-open { overflow: hidden; }
 
+.lb-img[hidden] { display: none; }
 .lb-img {
   max-width: min(92vw, 1100px);
   max-height: 82vh;

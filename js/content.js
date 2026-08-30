@@ -32,6 +32,7 @@
   })();
 
   var IMAGE_RE = /\.(jpe?g|png|webp|gif|svg|avif)$/i;
+  var VIDEO_RE = /\.(mp4|webm|mov|m4v)$/i;
   var local = ["localhost", "127.0.0.1", ""].indexOf(location.hostname) !== -1;
 
   /* ---------------------------------------------------------------- utils */
@@ -80,8 +81,10 @@
       if (!r.ok) throw new Error("github " + r.status);
       return r.json();
     }).then(function (items) {
+      /* the files are published alongside the page, so use the relative
+         path — same origin, properly cached, and it works for video seeking */
       return items.filter(function (i) { return i.type === "file"; })
-                  .map(function (i) { return { name: i.name, url: i.download_url }; });
+                  .map(function (i) { return { name: i.name, url: dir + "/" + i.name }; });
     });
   }
 
@@ -260,23 +263,35 @@
     if (!gridEl || !noteEl) return;
 
     listFolder(CONFIG.galleryDir).then(function (files) {
-      images = files.filter(function (f) { return IMAGE_RE.test(f.name); });
+      images = files.filter(function (f) {
+        return IMAGE_RE.test(f.name) || VIDEO_RE.test(f.name);
+      }).map(function (f) {
+        f.video = VIDEO_RE.test(f.name);
+        return f;
+      });
 
       if (!images.length) {
         noteEl.textContent =
-          "No drawings yet - drop image files into the gallery/ folder and they will appear here.";
+          "No drawings yet - drop image or video files into the gallery/ folder and they will appear here.";
         return;
       }
 
       gridEl.innerHTML = images.map(function (f, i) {
         var caption = titleize(f.name);
-        return '<button class="shot" type="button" data-i="' + i + '" aria-label="Open ' + esc(caption) + '">' +
-                 '<img src="' + f.url + '" alt="' + esc(caption) + '" loading="lazy">' +
+        var media = f.video
+          ? '<video src="' + f.url + '" muted loop playsinline preload="metadata"></video>' +
+            '<span class="shot-badge" aria-hidden="true">&#9654;</span>'
+          : '<img src="' + f.url + '" alt="' + esc(caption) + '" loading="lazy">';
+
+        return '<button class="shot' + (f.video ? " is-video" : "") + '" type="button" data-i="' + i +
+                 '" aria-label="Open ' + esc(caption) + (f.video ? " (animation)" : "") + '">' +
+                 media +
                  '<span class="shot-caption">' + esc(caption) + "</span>" +
                "</button>";
       }).join("");
 
       noteEl.hidden = true;
+      wirePreviews(gridEl);
       wireLightbox(gridEl);
     }).catch(function () {
       noteEl.innerHTML =
@@ -284,9 +299,28 @@
     });
   }
 
+  /* video tiles play quietly while the pointer is over them */
+  function wirePreviews(gridEl) {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+    gridEl.addEventListener("pointerenter", function (e) {
+      var v = e.target.closest && e.target.closest(".shot.is-video");
+      if (v) { var el = v.querySelector("video"); if (el) el.play().catch(function () {}); }
+    }, true);
+
+    gridEl.addEventListener("pointerleave", function (e) {
+      var v = e.target.closest && e.target.closest(".shot.is-video");
+      if (v) {
+        var el = v.querySelector("video");
+        if (el) { el.pause(); el.currentTime = 0; }
+      }
+    }, true);
+  }
+
   function wireLightbox(gridEl) {
     var box = document.getElementById("lightbox");
     var img = document.getElementById("lb-img");
+    var vid = document.getElementById("lb-video");
     var cap = document.getElementById("lb-caption");
     if (!box) return;
 
@@ -294,9 +328,24 @@
 
     function show(i) {
       current = (i + images.length) % images.length;
-      img.src = images[current].url;
-      img.alt = titleize(images[current].name);
-      cap.textContent = titleize(images[current].name);
+      var item = images[current];
+      var caption = titleize(item.name);
+
+      if (item.video) {
+        img.hidden = true;
+        img.removeAttribute("src");
+        vid.hidden = false;
+        vid.src = item.url;
+        vid.play().catch(function () {});
+      } else {
+        vid.pause();
+        vid.hidden = true;
+        vid.removeAttribute("src");
+        img.hidden = false;
+        img.src = item.url;
+        img.alt = caption;
+      }
+      cap.textContent = caption;
     }
 
     function open(i) {
@@ -308,6 +357,7 @@
 
     function close() {
       box.hidden = true;
+      vid.pause();
       document.body.classList.remove("lb-open");
     }
 
