@@ -638,6 +638,8 @@ main { position: relative; z-index: 10; }
   color: var(--ink-dim);
 }
 .fc-detail p:last-child { margin-bottom: 0; }
+.fc-detail strong { color: var(--fc); letter-spacing: .04em; }
+.fc-detail em { color: var(--ink); font-style: italic; }
 .fc-prompt {
   font-family: var(--font-hand);
   font-size: 1.22rem;
@@ -786,6 +788,187 @@ main { position: relative; z-index: 10; }
 .footer .handwritten { font-size: 1.5rem; margin: 0 0 .4rem; }
 .footer p { margin: 0; }
 
+/* ---------- 8b. Gallery + lightbox --------------------------------------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.shot {
+  position: relative;
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--card-bd);
+  border-radius: 14px;
+  background: var(--card-bg);
+  cursor: zoom-in;
+  transition: transform .3s cubic-bezier(.22, 1.15, .36, 1),
+              border-color .3s ease, box-shadow .3s ease;
+}
+.shot:hover, .shot:focus-visible {
+  transform: translateY(-5px);
+  border-color: var(--burgundy-300);
+  box-shadow: 0 18px 30px -16px rgba(0, 0, 0, .7), 0 0 26px -14px var(--glow);
+}
+
+.shot img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+.shot-caption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 1.6rem .8rem .6rem;
+  font-family: var(--font-body);
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-align: left;
+  color: var(--ink);
+  background: linear-gradient(180deg, rgba(20, 12, 15, 0), rgba(20, 12, 15, .88));
+}
+
+.feed-note {
+  font-size: .85rem;
+  color: var(--gray-500);
+  border: 1px dashed rgba(255, 255, 255, .16);
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem;
+}
+.feed-note code { color: var(--burgundy-200); }
+
+/* full-size view */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 5vw, 3rem);
+  background: rgba(10, 6, 8, .93);
+  backdrop-filter: blur(6px);
+}
+.lightbox[hidden] { display: none; }
+body.lb-open { overflow: hidden; }
+
+.lb-img {
+  max-width: min(92vw, 1100px);
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 0 60px -10px rgba(224, 84, 110, .5);
+}
+
+.lb-caption {
+  position: absolute;
+  bottom: clamp(.8rem, 3vw, 1.8rem);
+  left: 0; right: 0;
+  text-align: center;
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  color: var(--burgundy-200);
+  margin: 0;
+}
+
+.lightbox button {
+  position: absolute;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid var(--card-bd);
+  border-radius: 50%;
+  color: var(--ink);
+  font-size: 1.6rem;
+  line-height: 1;
+  width: 46px;
+  height: 46px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+}
+.lightbox button:hover { background: var(--burgundy-700); border-color: var(--glow); }
+.lb-close { top: clamp(.8rem, 3vw, 1.6rem); right: clamp(.8rem, 3vw, 1.6rem); }
+.lb-prev  { left: clamp(.5rem, 2vw, 1.6rem); top: 50%; transform: translateY(-50%); }
+.lb-next  { right: clamp(.5rem, 2vw, 1.6rem); top: 50%; transform: translateY(-50%); }
+
+/* ---------- 8c. Writing posts -------------------------------------------- */
+.post-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: .2rem;
+  padding: .3rem .8rem;
+  font-family: var(--font-body);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--burgundy-200);
+  background: transparent;
+  border: 1px solid rgba(224, 84, 110, .45);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .25s ease, border-color .25s ease, color .25s ease;
+}
+.post-toggle:hover { background: rgba(107, 31, 46, .55); color: var(--white); border-color: var(--glow); }
+
+.post-arrow { transition: transform .3s ease; }
+.timeline li.is-open .post-arrow { transform: rotate(90deg); }
+
+.post-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows .42s cubic-bezier(.4, 0, .2, 1), visibility .42s;
+}
+.timeline li.is-open .post-body { grid-template-rows: 1fr; visibility: visible; }
+.post-body-inner { overflow: hidden; }
+
+.timeline li.is-open .post-body-inner {
+  margin-top: 1rem;
+  padding: 1.2rem 1.35rem;
+  border: 1px solid var(--card-bd);
+  border-left: 2px solid var(--burgundy-500);
+  border-radius: 12px;
+  background: rgba(24, 17, 20, .6);
+  backdrop-filter: blur(6px);
+}
+
+.post-body-inner p { margin: 0 0 1rem; color: var(--ink-dim); font-size: .92rem; }
+.post-body-inner p:last-child { margin-bottom: 0; }
+.post-body-inner h2, .post-body-inner h3, .post-body-inner h4, .post-body-inner h5 {
+  font-size: 1.25rem;
+  margin: 1.4rem 0 .5rem;
+  color: var(--white);
+}
+.post-body-inner ul, .post-body-inner ol { margin: 0 0 1rem; padding-left: 1.3rem; color: var(--ink-dim); }
+.post-body-inner li { margin-bottom: .35rem; font-size: .92rem; }
+.post-body-inner blockquote {
+  margin: 0 0 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--burgundy-400);
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  color: var(--burgundy-200);
+}
+.post-body-inner img { border-radius: 10px; margin: .4rem 0 1rem; }
+.post-body-inner code {
+  padding: .1rem .35rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, .08);
+  color: var(--burgundy-200);
+  font-size: .88em;
+}
+.post-body-inner pre {
+  overflow-x: auto;
+  padding: .9rem 1rem;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, .45);
+}
+.post-body-inner pre code { background: none; padding: 0; color: var(--ink-dim); }
+.post-body-inner hr { border: 0; border-top: 1px dashed rgba(255, 255, 255, .18); margin: 1.4rem 0; }
+
 /* ---------- 9b. Peony section divider ------------------------------------ */
 .petal-divider {
   display: flex;
@@ -861,6 +1044,8 @@ main { position: relative; z-index: 10; }
   .garden { height: min(42vh, 320px); }
   .bloom.b3, .bloom.b4 { display: none; }
   .petal-divider { max-width: 260px; }
+  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .7rem; }
+  .lb-prev, .lb-next { top: auto; bottom: 4.5rem; transform: none; }
   .g3, .g5, .g7 { display: none; }
 }
 

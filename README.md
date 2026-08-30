@@ -44,6 +44,7 @@ index.html                    all the page content — this is the file to edit 
 css/styles.css                colors, fonts, layout (numbered sections, top to bottom)
 js/rain.js                    the rainfall
 js/cards.js                   expanding interest cards + their tilt-toward-cursor
+js/content.js                 reads writing/ and gallery/ and builds those sections
 js/petals.js                  peony petals falling and tumbling down the page
 js/sky.js                     stars, twinkle, and the occasional shooting star
 js/scene.js                   connects scroll position to rain / sky / garden
@@ -51,7 +52,40 @@ js/main.js                    menu, scroll reveal, calm mode, footer year
 assets/peony.svg              a peony blossom (used as the favicon)
 assets/peony-stem.svg         a peony on a stem — the flowers in the garden
 assets/portrait-placeholder.svg   swap for a real photo
+
+writing/                      one .md file per post -> the Writing section
+gallery/                      drawings -> the Gallery section
 ```
+
+## Adding writing and drawings
+
+These two folders are the whole workflow. Nothing else needs editing.
+
+**A new post** — add a file to `writing/`, named `2026-08-29-some-title.md`.
+The date orders the list and shows on the site; the rest becomes the title.
+Plain paragraphs are enough, and `**bold**`, `*italic*`, `# headings`, lists,
+quotes, links and images all work. Details in `writing/README.md`.
+
+**A new drawing** — drop an image into `gallery/`. The filename becomes the
+caption (`peony-study.jpg` shows as "Peony study"), and a `2026-05-` style
+prefix is stripped from it. Clicking any drawing opens it full size. Details in
+`gallery/README.md`.
+
+Both folders are read live from GitHub when the site is published, so a commit
+is all it takes — there is nothing to rebuild. While you are working locally the
+same sections read the folders straight off the dev server.
+
+Note: this reads the repository through GitHub's public API, which means **the
+repository has to be public** for the two sections to fill in. Before it is
+published they show a short note instead. The account and repository name are
+worked out from the site's own URL, so transferring or renaming the repo needs
+no code change.
+
+### The Projects section
+
+It is still in `index.html`, wrapped in an HTML comment just below the Gallery
+section. To bring it back, delete the `<!--` and `-->` around it and add a link
+to it in the nav.
 
 ## Making it yours
 
@@ -80,6 +114,7 @@ assets/portrait-placeholder.svg   swap for a real photo
 
 ## Accessibility
 
+- Gallery images open in a lightbox with arrow-key navigation and Escape to close.
 - Cards expand on click, close on a second click or the **Escape** key, and only
   one is open at a time.
 - The **Calm mode** button in the top bar stops the rain, the flicker, and the
